@@ -14,4 +14,8 @@ public interface UserAPI {
     @GetMapping("/{idUser}")
     @ResponseStatus(code = HttpStatus.OK)
     public UserDetailsResponse getFindUserDetails(@PathVariable("idUser") UUID idUser);
+
+    @PatchMapping("/{idUser}")
+    @ResponseStatus(code = HttpStatus.OK)
+    public void patchUpdateUserInformation(@PathVariable("idUser") UUID idUser, @RequestBody UserUpdateRequest userUpdateRequest);
 }

@@ -1,5 +1,6 @@
 package com.github.LazaroBitencourt.DevTalksAPI.user.domain;
 import com.github.LazaroBitencourt.DevTalksAPI.user.application.api.UserRequest;
+import com.github.LazaroBitencourt.DevTalksAPI.user.application.api.UserUpdateRequest;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,8 +24,8 @@ public class User {
     private String bio;
     @Lob
     @Column(name = "photo", columnDefinition = "BLOB")
-    private byte[] photo;
-    private int reputation;
+    private Byte[] photo;
+    private Integer reputation;
     @Enumerated(value = EnumType.STRING)
     private Status userStatus;
     private LocalDateTime createAt;
@@ -41,5 +42,19 @@ public class User {
         this.userStatus = userRequest.userStatus();
         this.createAt = LocalDateTime.now();
     }
+
+    public void updateUserInformation(UserUpdateRequest userUpdateRequest) {
+        userUpdateRequest.name().ifPresent(value -> this.name = value);
+        userUpdateRequest.userName().ifPresent(value -> this.userName = value);
+        userUpdateRequest.email().ifPresent(value -> this.email = value);
+        userUpdateRequest.password().ifPresent(value -> this.password = value);
+        userUpdateRequest.bio().ifPresent(value -> this.bio = value);
+        userUpdateRequest.photo().ifPresent(value -> this.photo = value);
+        userUpdateRequest.reputation().ifPresent(value -> this.reputation = value);
+        userUpdateRequest.userStatus().ifPresent(value -> this.userStatus = value);
+        this.updateAt = LocalDateTime.now();
+    }
+
+
 }
 

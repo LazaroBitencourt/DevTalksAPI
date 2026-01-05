@@ -7,8 +7,8 @@ public record UserRequest(
         String email,
         String password,
         String bio,
-        byte[] photo,
-        int reputation,
+        Byte[] photo,
+        Integer reputation,
         Status userStatus
 ) {
 
