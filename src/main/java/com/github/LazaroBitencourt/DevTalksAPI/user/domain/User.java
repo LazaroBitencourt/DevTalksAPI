@@ -39,7 +39,7 @@ public class User {
         this.bio = userRequest.bio();
         this.photo = userRequest.photo();
         this.reputation = userRequest.reputation();
-        this.userStatus = userRequest.userStatus();
+        this.userStatus = Status.ACTIVE;
         this.createAt = LocalDateTime.now();
     }
 
@@ -51,10 +51,13 @@ public class User {
         userUpdateRequest.bio().ifPresent(value -> this.bio = value);
         userUpdateRequest.photo().ifPresent(value -> this.photo = value);
         userUpdateRequest.reputation().ifPresent(value -> this.reputation = value);
-        userUpdateRequest.userStatus().ifPresent(value -> this.userStatus = value);
         this.updateAt = LocalDateTime.now();
     }
 
+    public void changeUserStatusToDeactivated() {
+        this.userStatus = Status.DEACTIVATE;
+        System.out.println("desativou");
+    }
 
 }
 

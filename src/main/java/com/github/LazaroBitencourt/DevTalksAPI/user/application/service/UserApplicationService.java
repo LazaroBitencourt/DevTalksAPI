@@ -34,12 +34,20 @@ public class UserApplicationService implements UserService{
     }
 
     @Override
-    public UserDetailsResponse UpdateUserInformation(UUID idUser, UserUpdateRequest userUpdateRequest) {
+    public void  UpdateUserInformation(UUID idUser, UserUpdateRequest userUpdateRequest) {
         log.info("[start] UserApplicationService - UpdateUserInformation");
         User user = repository.findUserById(idUser);
         user.updateUserInformation(userUpdateRequest);
         repository.save(user);
         log.info("[finish] UserApplicationService - UpdateUserInformation");
-        return null;
+    }
+
+    @Override
+    public void deactivateUser(UUID idUser) {
+        log.info("[start] UserApplicationService - deactivateUser");
+        User user = repository.findUserById(idUser);
+        user.changeUserStatusToDeactivated();
+        repository.save(user);
+        log.info("[finish] UserApplicationService - deactivateUser");
     }
 }

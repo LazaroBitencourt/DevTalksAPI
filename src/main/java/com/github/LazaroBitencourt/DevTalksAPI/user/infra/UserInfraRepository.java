@@ -39,4 +39,5 @@ public class UserInfraRepository implements UserRepository {
         ));
         return user;
     }
+
 }

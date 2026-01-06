@@ -1,5 +1,4 @@
 package com.github.LazaroBitencourt.DevTalksAPI.user.application.api;
-import com.github.LazaroBitencourt.DevTalksAPI.user.domain.Status;
 
 public record UserRequest(
         String name,
@@ -8,8 +7,7 @@ public record UserRequest(
         String password,
         String bio,
         Byte[] photo,
-        Integer reputation,
-        Status userStatus
+        Integer reputation
 ) {
 
 }

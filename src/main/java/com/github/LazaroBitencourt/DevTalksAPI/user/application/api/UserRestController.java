@@ -34,4 +34,11 @@ public class UserRestController implements UserAPI{
         service.UpdateUserInformation(idUser,userUpdateRequest);
         log.info("[finish] UserRestController - patchUpdateUserInformation");
     }
+
+    @Override
+    public void patchDeactivateUser(UUID idUser) {
+        log.info("[start] UserRestController - patchDeactivateUser");
+        service.deactivateUser(idUser);
+        log.info("[finish] UserRestController - patchDeactivateUser");
+    }
 }

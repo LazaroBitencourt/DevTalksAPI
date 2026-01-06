@@ -18,4 +18,8 @@ public interface UserAPI {
     @PatchMapping("/{idUser}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void patchUpdateUserInformation(@PathVariable("idUser") UUID idUser, @RequestBody UserUpdateRequest userUpdateRequest);
+
+    @PatchMapping("/{idUser}/DEACTIVATE")
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    public void patchDeactivateUser(@PathVariable("idUser") UUID idUser);
 }
