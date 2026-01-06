@@ -12,9 +12,11 @@ public record UserDetailsResponse(
         Status userStatus
 ) {
     public UserDetailsResponse(User user){
-        this (user.getName(),
+        this (
+                user.getName(),
                 user.getUserName(),
-                user.getBio(),user.getPhoto(),
+                user.getBio(),
+                user.getPhoto(),
                 user.getReputation(),
                 user.getUserStatus());
     }
