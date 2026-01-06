@@ -48,4 +48,11 @@ public class UserRestController implements UserAPI{
         service.activateUser(idUser);
         log.info("[finish] UserRestController - patchActivateUser");
     }
+
+    @Override
+    public void deleteUser(UUID idUser) {
+        log.info("[start] UserRestController - deleteUser");
+        service.deleteUserById(idUser);
+        log.info("[finish] UserRestController - deleteUser");
+    }
 }

@@ -59,4 +59,13 @@ public class UserApplicationService implements UserService{
         repository.save(user);
         log.info("[finish] UserApplicationService - activateUser");
     }
+
+    @Override
+    public void deleteUserById(UUID idUser) {
+    log.info("[start] UserApplicationService - deleteUserById");
+        User user = repository.findUserById(idUser);
+        user.changeUserStatusToDeleted();
+        repository.save(user);
+    log.info("[finish] UserApplicationService - deleteUserById");
+    }
 }

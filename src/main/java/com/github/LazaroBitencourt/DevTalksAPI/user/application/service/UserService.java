@@ -17,4 +17,6 @@ public interface UserService {
     void deactivateUser(UUID idUser);
 
     void activateUser(UUID idUser);
+
+    void deleteUserById(UUID idUser);
 }

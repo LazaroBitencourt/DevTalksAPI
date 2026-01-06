@@ -2,8 +2,10 @@ package com.github.LazaroBitencourt.DevTalksAPI.user.domain;
 import com.github.LazaroBitencourt.DevTalksAPI.user.application.api.UserRequest;
 import com.github.LazaroBitencourt.DevTalksAPI.user.application.api.UserUpdateRequest;
 import jakarta.persistence.*;
+import org.hibernate.annotations.SQLDelete;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.SQLRestriction;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -12,6 +14,8 @@ import java.util.UUID;
 @Getter
 @NoArgsConstructor
 @Table(name = "tb_user")
+@SQLDelete(sql = "UPDATE tb_user SET status = 'DELETED' WHERE id_user = ?")
+@SQLRestriction(value = "status <> 'DELETED'")
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -26,6 +30,7 @@ public class User {
     @Column(name = "photo", columnDefinition = "BLOB")
     private Byte[] photo;
     private Integer reputation;
+    @Column(name = "status")
     @Enumerated(value = EnumType.STRING)
     private Status userStatus;
     private LocalDateTime createAt;
@@ -60,6 +65,10 @@ public class User {
 
     public void changeUserStatusToActive() {
         this.userStatus = Status.ACTIVE;
+    }
+
+    public void changeUserStatusToDeleted() {
+        this.userStatus = Status.DELETED;
     }
 }
 
