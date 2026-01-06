@@ -27,7 +27,7 @@ public interface UserAPI {
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void patchActivateUser(@PathVariable("idUser") UUID idUser);
 
-    @DeleteMapping("{IdUser}")
+    @DeleteMapping("/{idUser}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void deleteUser(@PathVariable("idUser") UUID idUser);
 }
