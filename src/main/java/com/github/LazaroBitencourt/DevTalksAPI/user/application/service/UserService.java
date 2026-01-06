@@ -15,4 +15,6 @@ public interface UserService {
     void UpdateUserInformation(UUID idUser, UserUpdateRequest userUpdateRequest);
 
     void deactivateUser(UUID idUser);
+
+    void activateUser(UUID idUser);
 }

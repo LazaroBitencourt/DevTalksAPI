@@ -22,4 +22,8 @@ public interface UserAPI {
     @PatchMapping("/{idUser}/DEACTIVATE")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void patchDeactivateUser(@PathVariable("idUser") UUID idUser);
+
+    @PatchMapping("/{idUser}/ACTIVE")
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    public void patchActivateUser(@PathVariable("idUser") UUID idUser);
 }
