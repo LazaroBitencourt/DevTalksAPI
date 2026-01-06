@@ -56,8 +56,10 @@ public class User {
 
     public void changeUserStatusToDeactivated() {
         this.userStatus = Status.DEACTIVATE;
-        System.out.println("desativou");
     }
 
+    public void changeUserStatusToActive() {
+        this.userStatus = Status.ACTIVE;
+    }
 }
 

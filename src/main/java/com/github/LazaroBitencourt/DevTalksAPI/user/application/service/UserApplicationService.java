@@ -56,6 +56,7 @@ public class UserApplicationService implements UserService{
         log.info("[start] UserApplicationService - activateUser");
         User user = repository.findUserById(idUser);
         user.changeUserStatusToActive();
+        repository.save(user);
         log.info("[finish] UserApplicationService - activateUser");
     }
 }
