@@ -50,4 +50,12 @@ public class UserApplicationService implements UserService{
         repository.save(user);
         log.info("[finish] UserApplicationService - deactivateUser");
     }
+
+    @Override
+    public void activateUser(UUID idUser) {
+        log.info("[start] UserApplicationService - activateUser");
+        User user = repository.findUserById(idUser);
+        user.changeUserStatusToActive();
+        log.info("[finish] UserApplicationService - activateUser");
+    }
 }
