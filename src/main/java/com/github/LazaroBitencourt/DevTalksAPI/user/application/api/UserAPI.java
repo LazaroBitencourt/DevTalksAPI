@@ -1,5 +1,6 @@
 package com.github.LazaroBitencourt.DevTalksAPI.user.application.api;
 
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -9,7 +10,7 @@ import java.util.UUID;
 public interface UserAPI {
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    public UserIdResponse postCreateNewUser(@RequestBody UserRequest userRequest);
+    public UserIdResponse postCreateNewUser(@RequestBody @Valid UserRequest userRequest);
 
     @GetMapping("/{idUser}")
     @ResponseStatus(code = HttpStatus.OK)

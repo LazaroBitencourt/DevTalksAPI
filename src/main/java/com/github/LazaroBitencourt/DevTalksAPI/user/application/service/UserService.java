@@ -12,7 +12,7 @@ public interface UserService {
 
     UserDetailsResponse findUserDetails(UUID idUser);
 
-    void UpdateUserInformation(UUID idUser, UserUpdateRequest userUpdateRequest);
+    void updateUserInformation(UUID idUser, UserUpdateRequest userUpdateRequest);
 
     void deactivateUser(UUID idUser);
 
