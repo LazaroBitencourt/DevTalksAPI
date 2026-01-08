@@ -25,6 +25,7 @@ public class User {
     private String  userName;
     private String email;
     private String password;
+    @Column(length = 500)
     private String bio;
     @Lob
     @Column(name = "photo", columnDefinition = "BLOB")
@@ -43,7 +44,6 @@ public class User {
         this.password = userRequest.password();
         this.bio = userRequest.bio();
         this.photo = userRequest.photo();
-        this.reputation = userRequest.reputation();
         this.userStatus = Status.ACTIVE;
         this.createAt = LocalDateTime.now();
     }
@@ -55,7 +55,6 @@ public class User {
         userUpdateRequest.password().ifPresent(value -> this.password = value);
         userUpdateRequest.bio().ifPresent(value -> this.bio = value);
         userUpdateRequest.photo().ifPresent(value -> this.photo = value);
-        userUpdateRequest.reputation().ifPresent(value -> this.reputation = value);
         this.updateAt = LocalDateTime.now();
     }
 

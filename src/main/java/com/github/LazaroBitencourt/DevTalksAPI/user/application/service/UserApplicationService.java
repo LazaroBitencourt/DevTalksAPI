@@ -34,7 +34,7 @@ public class UserApplicationService implements UserService{
     }
 
     @Override
-    public void  UpdateUserInformation(UUID idUser, UserUpdateRequest userUpdateRequest) {
+    public void updateUserInformation(UUID idUser, UserUpdateRequest userUpdateRequest) {
         log.info("[start] UserApplicationService - UpdateUserInformation");
         User user = repository.findUserById(idUser);
         user.updateUserInformation(userUpdateRequest);
