@@ -1,6 +1,6 @@
 package com.github.LazaroBitencourt.DevTalksAPI.post.domain;
-import com.github.LazaroBitencourt.DevTalksAPI.author.domain.Author;
 import com.github.LazaroBitencourt.DevTalksAPI.category.domain.Category;
+import com.github.LazaroBitencourt.DevTalksAPI.user.domain.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 
@@ -22,8 +22,8 @@ public class Post {
     byte[] image;
     @ManyToOne
     @JoinColumn(name = "author_id", nullable = false, updatable = false)
-    Author author;
-    @OneToOne
+    User author;
+    @ManyToOne
     @JoinColumn(name = "category_id", nullable = false, updatable = false)
     Category category;
     @Column(name = "created_at")
