@@ -7,7 +7,7 @@ public record UserDetailsResponse(
         String name,
         String userName,
         String bio,
-        Byte[] photo,
+        byte[] photo,
         Integer reputation,
         Status userStatus
 ) {

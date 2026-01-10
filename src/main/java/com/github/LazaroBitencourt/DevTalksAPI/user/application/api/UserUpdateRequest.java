@@ -8,5 +8,5 @@ public record UserUpdateRequest (
     Optional<String>email,
     Optional<String> password,
     Optional<String> bio,
-    Optional<Byte[]> photo
+    Optional<byte[]> photo
 ){}

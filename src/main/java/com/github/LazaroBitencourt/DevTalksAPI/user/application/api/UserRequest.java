@@ -24,7 +24,7 @@ public record UserRequest(
 
         @Size(max = 500, message = "BIO MUST BE AT MOST 500 CHARACTERS")
         String bio,
-        Byte[] photo
+        byte[] photo
 ) {
 
 }
