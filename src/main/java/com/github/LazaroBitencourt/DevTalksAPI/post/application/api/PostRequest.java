@@ -1,13 +1,11 @@
 package com.github.LazaroBitencourt.DevTalksAPI.post.application.api;
 
-import com.github.LazaroBitencourt.DevTalksAPI.author.domain.Author;
-import com.github.LazaroBitencourt.DevTalksAPI.category.domain.Category;
-
+import java.util.UUID;
 
 public record PostRequest(
         String title,
         String content,
-        Author author,
-        Category category
+        UUID idAuthor,
+        UUID  idCategory
 ) {
 }

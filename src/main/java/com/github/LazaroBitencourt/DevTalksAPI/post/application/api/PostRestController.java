@@ -9,12 +9,12 @@ import org.springframework.web.bind.annotation.RestController;
 @Log4j2
 @RequiredArgsConstructor
 public class PostRestController implements PostApi {
-    private final PostService service;
+    private final PostService postService;
 
     @Override
     public PostIdResponse postCreateNewPost(PostRequest postRequest) {
         log.info("[start] PostRestController - postCreateNewPost");
-        PostIdResponse post = service.createNewPost(postRequest);
+        PostIdResponse post = postService.createNewPost(postRequest);
         log.info("[finish] PostRestController - postCreateNewPost");
         return post;
     }
