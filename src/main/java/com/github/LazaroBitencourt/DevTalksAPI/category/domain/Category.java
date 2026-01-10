@@ -24,6 +24,6 @@ public class Category {
     byte[] image;
     @Enumerated(EnumType.STRING)
     Status status;
-    @OneToMany(mappedBy = "category")
+    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
     List<Post> posts;
 }
