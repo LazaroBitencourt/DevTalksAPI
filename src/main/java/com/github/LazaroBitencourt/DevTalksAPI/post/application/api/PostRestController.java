@@ -1,5 +1,6 @@
 package com.github.LazaroBitencourt.DevTalksAPI.post.application.api;
 
+import com.github.LazaroBitencourt.DevTalksAPI.post.application.service.PostService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.RestController;
@@ -8,8 +9,12 @@ import org.springframework.web.bind.annotation.RestController;
 @Log4j2
 @RequiredArgsConstructor
 public class PostRestController implements PostApi {
+    private final PostService service;
     @Override
     public PostIdResponse postCreateNewPost(PostRequest postRequest) {
-        return null;
+        log.info("[start] PostRestController - postCreateNewPost");
+        PostIdResponse post = service.createNewPost(postRequest);
+        log.info("[finish] PostRestController - postCreateNewPost");
+        return post;
     }
 }
