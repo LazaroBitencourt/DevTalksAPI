@@ -1,10 +1,13 @@
 package com.github.LazaroBitencourt.DevTalksAPI.user.application.api;
 
 import com.github.LazaroBitencourt.DevTalksAPI.user.application.service.UserService;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.UUID;
 
 @RestController
@@ -13,9 +16,15 @@ import java.util.UUID;
 public class UserRestController implements UserAPI{
     private final UserService service;
     @Override
-    public UserIdResponse postCreateNewUser(UserRequest userRequest) {
+    public UserIdResponse postCreateNewUser(UserRequest userRequest, HttpServletResponse response) {
         log.info("[start] UserRestController - postCreateNewUser");
         UserIdResponse user = service.createNewUser(userRequest);
+        String uri = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(user.idUser())
+                .toUriString();
+        response.setHeader("Location", uri);
         log.info("[finish] UserRestController - postCreateNewUser");
         return user;
     }
