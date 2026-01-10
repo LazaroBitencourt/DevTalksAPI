@@ -19,7 +19,7 @@ import java.util.UUID;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
-    @Column(columnDefinition = "BINARY(16)", name = "id_user", unique = true, nullable = false)
+    @Column(columnDefinition = "BINARY(16)", name = "user_id", unique = true, nullable = false)
     private UUID id;
     private String name;
     private String  userName;
@@ -29,12 +29,14 @@ public class User {
     private String bio;
     @Lob
     @Column(name = "photo", columnDefinition = "BLOB")
-    private Byte[] photo;
+    private byte[] photo;
     private Integer reputation;
     @Column(name = "status")
     @Enumerated(value = EnumType.STRING)
     private Status userStatus;
+    @Column(name = "created_at")
     private LocalDateTime createAt;
+    @Column(name = "update_at")
     private LocalDateTime updateAt;
 
     public User(UserRequest userRequest){
