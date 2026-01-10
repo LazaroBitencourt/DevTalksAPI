@@ -14,6 +14,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class UserRestController implements UserAPI{
     private final UserService service;
+
     @Override
     public UserIdResponse postCreateNewUser(UserRequest userRequest, HttpServletResponse response) {
         log.info("[start] UserRestController - postCreateNewUser");

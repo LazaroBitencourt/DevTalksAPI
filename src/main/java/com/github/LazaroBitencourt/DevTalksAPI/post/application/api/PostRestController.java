@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 public class PostRestController implements PostApi {
     private final PostService service;
+
     @Override
     public PostIdResponse postCreateNewPost(PostRequest postRequest) {
         log.info("[start] PostRestController - postCreateNewPost");

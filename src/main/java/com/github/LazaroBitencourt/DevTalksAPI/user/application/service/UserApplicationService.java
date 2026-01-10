@@ -17,6 +17,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class UserApplicationService implements UserService{
     private final UserRepository repository;
+
     @Override
     public UserIdResponse createNewUser(UserRequest userRequest) {
         log.info("[start] UserApplicationService - createNewUser");
