@@ -23,7 +23,7 @@ public class Post {
     @ManyToOne
     @JoinColumn(name = "author_id", nullable = false, updatable = false)
     User author;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "category_id", nullable = false, updatable = false)
     Category category;
     @Column(name = "created_at")
