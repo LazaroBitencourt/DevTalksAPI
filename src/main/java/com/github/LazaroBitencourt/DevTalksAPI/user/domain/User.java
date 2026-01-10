@@ -36,7 +36,7 @@ public class User {
     private Status userStatus;
     @Column(name = "created_at")
     private LocalDateTime createAt;
-    @Column(name = "update_t")
+    @Column(name = "update_at")
     private LocalDateTime updateAt;
 
     public User(UserRequest userRequest){

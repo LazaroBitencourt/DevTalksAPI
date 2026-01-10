@@ -28,7 +28,7 @@ public class Post {
     Category category;
     @Column(name = "created_at")
     private LocalDateTime createAt;
-    @Column(name = "update_t")
+    @Column(name = "update_at")
     private LocalDateTime updateAt;
     @Enumerated(EnumType.STRING)
     Status status;
