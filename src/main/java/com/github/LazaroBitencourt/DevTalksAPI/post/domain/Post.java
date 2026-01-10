@@ -1,7 +1,7 @@
 package com.github.LazaroBitencourt.DevTalksAPI.post.domain;
-import com.github.LazaroBitencourt.DevTalksAPI.author.domain.Author;
 import com.github.LazaroBitencourt.DevTalksAPI.category.domain.Category;
 import com.github.LazaroBitencourt.DevTalksAPI.post.application.api.PostRequest;
+import com.github.LazaroBitencourt.DevTalksAPI.user.domain.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,7 +25,7 @@ public class Post {
     byte[] image;
     @ManyToOne
     @JoinColumn(name = "author_id", nullable = false, updatable = false)
-    Author author;
+    User author;
     @OneToOne
     @JoinColumn(name = "category_id", nullable = false, updatable = false)
     Category category;
@@ -36,11 +36,10 @@ public class Post {
     @Enumerated(EnumType.STRING)
     Status status;
 
-    public Post(PostRequest postRequest) {
+    public Post(PostRequest postRequest, User user) {
         this.title = postRequest.title();
         this.content = postRequest.content();
-        this.author = postRequest.author();
-        this.category = postRequest.category();
+        this.author = user;
         this.createAt = LocalDateTime.now();
         this.status = Status.ACTIVE;
     }
