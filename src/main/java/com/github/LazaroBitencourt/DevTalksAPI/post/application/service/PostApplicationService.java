@@ -1,5 +1,7 @@
 package com.github.LazaroBitencourt.DevTalksAPI.post.application.service;
 
+import com.github.LazaroBitencourt.DevTalksAPI.category.application.repository.CategoryRepository;
+import com.github.LazaroBitencourt.DevTalksAPI.category.domain.Category;
 import com.github.LazaroBitencourt.DevTalksAPI.post.application.api.PostIdResponse;
 import com.github.LazaroBitencourt.DevTalksAPI.post.application.api.PostRequest;
 import com.github.LazaroBitencourt.DevTalksAPI.post.application.repository.PostRepository;
@@ -16,6 +18,7 @@ import org.springframework.stereotype.Service;
 public class PostApplicationService implements PostService{
     private final PostRepository postRepository;
     private final UserRepository userRepository;
+    private final CategoryRepository categoryRepository;
     @Override
     public PostIdResponse createNewPost(PostRequest postRequest) {
         log.info("[start] PostApplicationService - createNewPost");

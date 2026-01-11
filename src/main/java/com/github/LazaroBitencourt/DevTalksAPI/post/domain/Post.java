@@ -1,5 +1,6 @@
 package com.github.LazaroBitencourt.DevTalksAPI.post.domain;
 import com.github.LazaroBitencourt.DevTalksAPI.category.domain.Category;
+import com.github.LazaroBitencourt.DevTalksAPI.post.application.api.PostRequest;
 import com.github.LazaroBitencourt.DevTalksAPI.user.domain.User;
 import jakarta.persistence.*;
 import lombok.Getter;
