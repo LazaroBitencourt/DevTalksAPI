@@ -1,14 +1,17 @@
 package com.github.LazaroBitencourt.DevTalksAPI.post.domain;
 import com.github.LazaroBitencourt.DevTalksAPI.category.domain.Category;
+import com.github.LazaroBitencourt.DevTalksAPI.post.application.api.PostRequest;
 import com.github.LazaroBitencourt.DevTalksAPI.user.domain.User;
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
 @Getter
+@NoArgsConstructor
 @Table(name = "tb_post")
 public class Post {
     @Id
@@ -32,4 +35,12 @@ public class Post {
     private LocalDateTime updateAt;
     @Enumerated(EnumType.STRING)
     Status status;
+
+    public Post(PostRequest postRequest, User user) {
+        this.title = postRequest.title();
+        this.content = postRequest.content();
+        this.author = user;
+        this.createAt = LocalDateTime.now();
+        this.status = Status.ACTIVE;
+    }
 }

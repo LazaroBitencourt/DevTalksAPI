@@ -16,11 +16,12 @@ import java.util.UUID;
 @Log4j2
 @RequiredArgsConstructor
 public class UserApplicationService implements UserService{
-    private final UserRepository repository;
+    private final UserRepository userRepository;
+
     @Override
     public UserIdResponse createNewUser(UserRequest userRequest) {
         log.info("[start] UserApplicationService - createNewUser");
-        User user = repository.save(new User((userRequest)));
+        User user = userRepository.save(new User((userRequest)));
         log.info("[finish] UserApplicationService - createNewUser");
         return UserIdResponse.builder().idUser(user.getId()).build();
     }
@@ -28,7 +29,7 @@ public class UserApplicationService implements UserService{
     @Override
     public UserDetailsResponse findUserDetails(UUID idUser) {
         log.info("[start] UserApplicationService - findUserDetails");
-        User user = repository.findUserById(idUser);
+        User user = userRepository.findUserById(idUser);
         log.info("[finish] UserApplicationService - findUserDetails");
         return new UserDetailsResponse(user);
     }
@@ -36,36 +37,36 @@ public class UserApplicationService implements UserService{
     @Override
     public void updateUserInformation(UUID idUser, UserUpdateRequest userUpdateRequest) {
         log.info("[start] UserApplicationService - UpdateUserInformation");
-        User user = repository.findUserById(idUser);
+        User user = userRepository.findUserById(idUser);
         user.updateUserInformation(userUpdateRequest);
-        repository.save(user);
+        userRepository.save(user);
         log.info("[finish] UserApplicationService - UpdateUserInformation");
     }
 
     @Override
     public void deactivateUser(UUID idUser) {
         log.info("[start] UserApplicationService - deactivateUser");
-        User user = repository.findUserById(idUser);
+        User user = userRepository.findUserById(idUser);
         user.changeUserStatusToDeactivated();
-        repository.save(user);
+        userRepository.save(user);
         log.info("[finish] UserApplicationService - deactivateUser");
     }
 
     @Override
     public void activateUser(UUID idUser) {
         log.info("[start] UserApplicationService - activateUser");
-        User user = repository.findUserById(idUser);
+        User user = userRepository.findUserById(idUser);
         user.changeUserStatusToActive();
-        repository.save(user);
+        userRepository.save(user);
         log.info("[finish] UserApplicationService - activateUser");
     }
 
     @Override
     public void deleteUserById(UUID idUser) {
     log.info("[start] UserApplicationService - deleteUserById");
-        User user = repository.findUserById(idUser);
+        User user = userRepository.findUserById(idUser);
         user.changeUserStatusToDeleted();
-        repository.save(user);
+        userRepository.save(user);
     log.info("[finish] UserApplicationService - deleteUserById");
     }
 }

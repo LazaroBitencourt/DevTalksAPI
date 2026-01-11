@@ -26,8 +26,8 @@ public class Category {
     byte[] image;
     @Enumerated(EnumType.STRING)
     Status status;
-    /*@OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
-    List<Post> posts;*/
+    @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
+    List<Post> posts;
     LocalDateTime createdAt;
     LocalDateTime updatedAt;
 

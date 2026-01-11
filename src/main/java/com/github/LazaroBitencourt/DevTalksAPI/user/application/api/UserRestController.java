@@ -13,11 +13,12 @@ import java.util.UUID;
 @Log4j2
 @RequiredArgsConstructor
 public class UserRestController implements UserAPI{
-    private final UserService service;
+    private final UserService userService;
+
     @Override
     public UserIdResponse postCreateNewUser(UserRequest userRequest, HttpServletResponse response) {
         log.info("[start] UserRestController - postCreateNewUser");
-        UserIdResponse user = service.createNewUser(userRequest);
+        UserIdResponse user = userService.createNewUser(userRequest);
         String uri = ServletUriComponentsBuilder
                 .fromCurrentRequest()
                 .path("/{id}")
@@ -31,7 +32,7 @@ public class UserRestController implements UserAPI{
     @Override
     public UserDetailsResponse getFindUserDetails(UUID idUser) {
         log.info("[start] UserRestController - getFindUserDetails");
-        UserDetailsResponse user = service.findUserDetails(idUser);
+        UserDetailsResponse user = userService.findUserDetails(idUser);
         log.info("[finish] UserRestController - getFindUserDetails");
         return user;
     }
@@ -39,28 +40,28 @@ public class UserRestController implements UserAPI{
     @Override
     public void patchUpdateUserInformation(UUID idUser, UserUpdateRequest userUpdateRequest) {
         log.info("[start] UserRestController - patchUpdateUserInformation");
-        service.updateUserInformation(idUser,userUpdateRequest);
+        userService.updateUserInformation(idUser,userUpdateRequest);
         log.info("[finish] UserRestController - patchUpdateUserInformation");
     }
 
     @Override
     public void patchDeactivateUser(UUID idUser) {
         log.info("[start] UserRestController - patchDeactivateUser");
-        service.deactivateUser(idUser);
+        userService.deactivateUser(idUser);
         log.info("[finish] UserRestController - patchDeactivateUser");
     }
 
     @Override
     public void patchActivateUser(UUID idUser) {
         log.info("[start] UserRestController - patchActivateUser");
-        service.activateUser(idUser);
+        userService.activateUser(idUser);
         log.info("[finish] UserRestController - patchActivateUser");
     }
 
     @Override
     public void deleteUser(UUID idUser) {
         log.info("[start] UserRestController - deleteUser");
-        service.deleteUserById(idUser);
+        userService.deleteUserById(idUser);
         log.info("[finish] UserRestController - deleteUser");
     }
 }
