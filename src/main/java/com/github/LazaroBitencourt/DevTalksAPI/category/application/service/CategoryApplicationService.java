@@ -27,6 +27,9 @@ public class CategoryApplicationService implements CategoryService{
 
     @Override
     public CategoryRespose findCategoryById(UUID idCategory) {
-        return null;
+        log.info("[start] CategoryApplicationService - findCategoryById(");
+        Category category = categoryRepository.findCategoryById(idCategory);
+        log.info("[finish] CategoryApplicationService - findCategoryById(");
+        return new CategoryRespose(category);
     }
 }
