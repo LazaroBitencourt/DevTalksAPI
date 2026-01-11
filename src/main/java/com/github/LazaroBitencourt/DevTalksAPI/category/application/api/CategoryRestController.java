@@ -14,7 +14,7 @@ public class CategoryRestController implements CategoryAPI{
     @Override
     public CategoryIdResponse postCreateNewCategory(CategoryRequest categoryRequest) {
         log.info("[start] CategoryRestController - postCreateCategory");
-        CategoryIdResponse category = categoryService.createNewCatergory(categoryRequest);
+        CategoryIdResponse category = categoryService.createNewCategory(categoryRequest);
         log.info("[finish] CategoryRestController - postCreateCategory");
         return category;
     }

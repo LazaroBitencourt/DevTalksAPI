@@ -4,5 +4,5 @@ import com.github.LazaroBitencourt.DevTalksAPI.category.application.api.Category
 import com.github.LazaroBitencourt.DevTalksAPI.category.application.api.CategoryRequest;
 
 public interface CategoryService {
-    CategoryIdResponse createNewCatergory(CategoryRequest categoryRequest);
+    CategoryIdResponse createNewCategory(CategoryRequest categoryRequest);
 }
