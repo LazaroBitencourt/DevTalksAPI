@@ -10,5 +10,5 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public interface CategoryAPI {
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    public CategoryIdResponse postCreateCategory(@RequestBody CategoryRequest categoryRequest);
+    public CategoryIdResponse postCreateNewCategory(@RequestBody CategoryRequest categoryRequest);
 }
