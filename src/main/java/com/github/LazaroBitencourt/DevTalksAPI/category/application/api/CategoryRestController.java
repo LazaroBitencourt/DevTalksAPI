@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -27,5 +28,13 @@ public class CategoryRestController implements CategoryAPI{
         CategoryRespose category = categoryService.findCategoryById(idCategory);
         log.info("[finish] CategoryRestController - getFindCategoryById");
         return category;
+    }
+
+    @Override
+    public List<ListCategoryResponse> getListCategories() {
+        log.info("[start] CategoryRestController - getListCategories");
+        List<ListCategoryResponse> listCategories = categoryService.listCategories();
+        log.info("[finish] CategoryRestController - getListCategories");
+        return listCategories;
     }
 }
