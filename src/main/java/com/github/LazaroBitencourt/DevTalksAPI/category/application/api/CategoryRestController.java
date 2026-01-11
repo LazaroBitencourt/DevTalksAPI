@@ -24,8 +24,8 @@ public class CategoryRestController implements CategoryAPI{
     @Override
     public CategoryRespose getFindCategoryById(UUID idCategory) {
         log.info("[start] CategoryRestController - getFindCategoryById");
-
+        CategoryRespose category = categoryService.findCategoryById(idCategory);
         log.info("[finish] CategoryRestController - getFindCategoryById");
-        return null;
+        return category;
     }
 }
