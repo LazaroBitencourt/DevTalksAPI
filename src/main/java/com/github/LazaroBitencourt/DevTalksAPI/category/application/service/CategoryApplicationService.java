@@ -3,12 +3,14 @@ package com.github.LazaroBitencourt.DevTalksAPI.category.application.service;
 import com.github.LazaroBitencourt.DevTalksAPI.category.application.api.CategoryIdResponse;
 import com.github.LazaroBitencourt.DevTalksAPI.category.application.api.CategoryRequest;
 import com.github.LazaroBitencourt.DevTalksAPI.category.application.api.CategoryRespose;
+import com.github.LazaroBitencourt.DevTalksAPI.category.application.api.ListCategoryResponse;
 import com.github.LazaroBitencourt.DevTalksAPI.category.application.repository.CategoryRepository;
 import com.github.LazaroBitencourt.DevTalksAPI.category.domain.Category;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -31,5 +33,14 @@ public class CategoryApplicationService implements CategoryService{
         Category category = categoryRepository.findCategoryById(idCategory);
         log.info("[finish] CategoryApplicationService - findCategoryById(");
         return new CategoryRespose(category);
+    }
+
+    @Override
+    public List<ListCategoryResponse> listCategories() {
+        log.info("[start] CategoryApplicationService - listCategories");
+        List<Category> listCategory = categoryRepository.findAllCategory();
+        log.info("[finish] CategoryApplicationService - listCategories");
+        return ListCategoryResponse.convertToListOfCategoryResponse(listCategory);
+
     }
 }

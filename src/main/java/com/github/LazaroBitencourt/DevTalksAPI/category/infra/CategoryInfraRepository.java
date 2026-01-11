@@ -11,6 +11,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.UUID;
 
 @Repository
@@ -40,5 +41,13 @@ public class CategoryInfraRepository implements CategoryRepository {
                         + " PLEASE PROVIDE A VALID ID OR CONTACT THE SYSTEM ADMINISTRATOR!"));
         log.info("[finish] CategoryApplicationService - findCategoryById");
         return category;
+    }
+
+    @Override
+    public List<Category> findAllCategory() {
+        log.info("[start] CategoryApplicationService - findAllCategory");
+        List<Category> listCategory = jpaRepository.findAll();
+        log.info("[finish] CategoryApplicationService - findAllCategory");
+        return listCategory;
     }
 }
