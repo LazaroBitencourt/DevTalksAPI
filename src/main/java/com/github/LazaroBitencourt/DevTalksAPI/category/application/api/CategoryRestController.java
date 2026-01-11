@@ -5,6 +5,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.UUID;
+
 @RestController
 @Log4j2
 @RequiredArgsConstructor
@@ -16,6 +18,14 @@ public class CategoryRestController implements CategoryAPI{
         log.info("[start] CategoryRestController - postCreateCategory");
         CategoryIdResponse category = categoryService.createNewCategory(categoryRequest);
         log.info("[finish] CategoryRestController - postCreateCategory");
+        return category;
+    }
+
+    @Override
+    public CategoryRespose getFindCategoryById(UUID idCategory) {
+        log.info("[start] CategoryRestController - getFindCategoryById");
+        CategoryRespose category = categoryService.findCategoryById(idCategory);
+        log.info("[finish] CategoryRestController - getFindCategoryById");
         return category;
     }
 }
