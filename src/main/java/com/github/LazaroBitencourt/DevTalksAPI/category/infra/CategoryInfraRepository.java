@@ -28,7 +28,6 @@ public class CategoryInfraRepository implements CategoryRepository {
         }catch (DataIntegrityViolationException e){
             throw APIException.build(HttpStatus.BAD_REQUEST,"THERE ARE DUPLICATE DATA", e);
         }
-
         log.info("[finish] CategoryInfraRepository - save");
         return category;
     }

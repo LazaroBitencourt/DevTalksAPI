@@ -1,5 +1,6 @@
 package com.github.LazaroBitencourt.DevTalksAPI.category.application.api;
 
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -10,7 +11,7 @@ import java.util.UUID;
 public interface CategoryAPI {
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
-    public CategoryIdResponse postCreateNewCategory(@RequestBody CategoryRequest categoryRequest);
+    public CategoryIdResponse postCreateNewCategory(@RequestBody CategoryRequest categoryRequest, HttpServletResponse response);
 
     @GetMapping("/{idCategory}")
     @ResponseStatus(code = HttpStatus.OK)
