@@ -37,4 +37,9 @@ public class Category {
         this.status = Status.ACTIVE;
         this.createdAt = LocalDateTime.now();
     }
+
+    public void updateCategory(CategoryRequest categoryRequest) {
+        this.name = categoryRequest.name();
+        this.description = categoryRequest.description();
+    }
 }
