@@ -43,4 +43,13 @@ public class CategoryApplicationService implements CategoryService{
         return ListCategoryResponse.convertToListOfCategoryResponse(listCategory);
 
     }
+
+    @Override
+    public void updateCategory(CategoryRequest categoryRequest, UUID idCategory) {
+        log.info("[start] CategoryApplicationService - updateCategory]");
+        Category category = categoryRepository.findCategoryById(idCategory);
+        category.updateCategory(categoryRequest);
+        categoryRepository.save(category);
+        log.info("[finish] CategoryApplicationService - updateCategory]");
+    }
 }

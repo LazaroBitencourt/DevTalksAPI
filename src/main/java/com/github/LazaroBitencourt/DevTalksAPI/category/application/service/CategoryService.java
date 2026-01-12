@@ -14,4 +14,6 @@ public interface CategoryService {
     CategoryRespose findCategoryById(UUID idCategory);
 
     List<ListCategoryResponse> listCategories();
+
+    void updateCategory(CategoryRequest categoryRequest, UUID idCategory);
 }
