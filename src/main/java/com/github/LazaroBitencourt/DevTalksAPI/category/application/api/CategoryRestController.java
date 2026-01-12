@@ -45,4 +45,11 @@ public class CategoryRestController implements CategoryAPI{
         log.info("[finish] CategoryRestController - getListCategories");
         return listCategories;
     }
+
+    @Override
+    public void patchUpdateCategory(CategoryRequest categoryRequest, UUID idCategory) {
+        log.info("CategoryRestController - patchUpdateCategory");
+        //categoryService.updateCategory(categoryRequest,idCategory);
+        log.info("CategoryRestController - patchUpdateCategory");
+    }
 }

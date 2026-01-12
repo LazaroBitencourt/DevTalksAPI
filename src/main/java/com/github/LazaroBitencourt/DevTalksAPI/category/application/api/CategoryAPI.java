@@ -15,9 +15,14 @@ public interface CategoryAPI {
 
     @GetMapping("/{idCategory}")
     @ResponseStatus(code = HttpStatus.OK)
-    public CategoryRespose getFindCategoryById(@PathVariable("idCategory")UUID idCategory);
+    public CategoryRespose getFindCategoryById(@PathVariable("idCategory") UUID idCategory);
 
     @GetMapping
     @ResponseStatus(code = HttpStatus.OK)
     public List<ListCategoryResponse> getListCategories();
+
+    @PatchMapping("/{idCategory}")
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    public void patchUpdateCategory(@RequestBody CategoryRequest categoryRequest, @PathVariable("idCategory") UUID idCategory);
+
 }
