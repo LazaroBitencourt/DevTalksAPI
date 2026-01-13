@@ -25,4 +25,7 @@ public interface CategoryAPI {
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void patchUpdateCategory(@RequestBody CategoryRequest categoryRequest, @PathVariable("idCategory") UUID idCategory);
 
+    @PatchMapping("/{idCategory}/DEACTIVATE")
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    public void patchDeactivateCategory(@PathVariable("idCategory") UUID idCategory);
 }

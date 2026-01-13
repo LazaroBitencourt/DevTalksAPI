@@ -52,4 +52,13 @@ public class CategoryApplicationService implements CategoryService{
         categoryRepository.save(category);
         log.info("[finish] CategoryApplicationService - updateCategory]");
     }
+
+    @Override
+    public void deactivateCategory(UUID idCategory) {
+        log.info("[start] CategoryApplicationService - deactivateCategory");
+        Category category = categoryRepository.findCategoryById(idCategory);
+        category.changeCategoryStatusToDeactivated();
+        categoryRepository.save(category);
+        log.info("[finish] CategoryApplicationService - deactivateCategory");
+    }
 }

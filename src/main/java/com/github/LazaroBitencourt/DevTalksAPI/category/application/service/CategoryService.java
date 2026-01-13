@@ -16,4 +16,6 @@ public interface CategoryService {
     List<ListCategoryResponse> listCategories();
 
     void updateCategory(CategoryRequest categoryRequest, UUID idCategory);
+
+    void deactivateCategory(UUID idCategory);
 }

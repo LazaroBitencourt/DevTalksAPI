@@ -42,4 +42,8 @@ public class Category {
         this.name = categoryRequest.name();
         this.description = categoryRequest.description();
     }
+
+    public void changeCategoryStatusToDeactivated() {
+        this.status = Status.DEACTIVATED;
+    }
 }
