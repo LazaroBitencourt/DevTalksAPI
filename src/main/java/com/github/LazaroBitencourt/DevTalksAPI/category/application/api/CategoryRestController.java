@@ -57,6 +57,6 @@ public class CategoryRestController implements CategoryAPI{
     public void patchDeactivateCategory(UUID idCategory) {
         log.info("[start] CategoryRestController - patchDeactivateCategory");
         categoryService.deactivateCategory(idCategory);
-        log.info("[start] CategoryRestController - patchDeactivateCategory");
+        log.info("[finish] CategoryRestController - patchDeactivateCategory");
     }
 }
