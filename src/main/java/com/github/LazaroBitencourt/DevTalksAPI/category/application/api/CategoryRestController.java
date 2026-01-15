@@ -66,4 +66,11 @@ public class CategoryRestController implements CategoryAPI{
         categoryService.activateCategory(idCategory);
         log.info("[finish] CategoryRestController - patchActivateCategory]");
     }
+
+    @Override
+    public void deleleCategory(UUID idCategory) {
+        log.info("[start] CategoryRestController - patchActivateCategory]");
+        categoryService.deleteCategory(idCategory);
+        log.info("[finish] CategoryRestController - patchActivateCategory]");
+    }
 }
