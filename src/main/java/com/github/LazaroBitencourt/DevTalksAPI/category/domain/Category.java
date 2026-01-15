@@ -5,6 +5,8 @@ import com.github.LazaroBitencourt.DevTalksAPI.post.domain.Post;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.SQLRestriction;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -14,6 +16,8 @@ import java.util.UUID;
 @Getter
 @NoArgsConstructor
 @Table(name = "tb_category")
+@SQLDelete(sql = "UPDATE tb_category SET status = 'DELETED' WHERE category_id = ?")
+@SQLRestriction(value = "status <> 'DELETED'")
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -41,6 +45,7 @@ public class Category {
     public void updateCategory(CategoryRequest categoryRequest) {
         this.name = categoryRequest.name();
         this.description = categoryRequest.description();
+        updatedAt = LocalDateTime.now();
     }
 
     public void changeCategoryStatusToDeactivated() {
@@ -49,5 +54,9 @@ public class Category {
 
     public void changeCategoryStatusToActive() {
         this.status = Status.ACTIVE;
+    }
+
+    public void changeCategoryStatusToDeleted() {
+        this.status = Status.DELETED;
     }
 }
