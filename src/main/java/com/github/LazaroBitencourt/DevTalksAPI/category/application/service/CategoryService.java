@@ -18,4 +18,6 @@ public interface CategoryService {
     void updateCategory(CategoryRequest categoryRequest, UUID idCategory);
 
     void deactivateCategory(UUID idCategory);
+
+    void activateCategory(UUID idCategory);
 }
