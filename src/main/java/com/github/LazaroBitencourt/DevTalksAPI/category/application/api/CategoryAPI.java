@@ -28,4 +28,8 @@ public interface CategoryAPI {
     @PatchMapping("/{idCategory}/DEACTIVATE")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void patchDeactivateCategory(@PathVariable("idCategory") UUID idCategory);
+
+    @PatchMapping("/{idCategory}/ACTIVE")
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    public void patchActivateCategory(@PathVariable("idCategory") UUID idCategory);
 }

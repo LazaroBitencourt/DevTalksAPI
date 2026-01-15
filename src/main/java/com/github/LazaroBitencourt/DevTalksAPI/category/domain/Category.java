@@ -46,4 +46,8 @@ public class Category {
     public void changeCategoryStatusToDeactivated() {
         this.status = Status.DEACTIVATED;
     }
+
+    public void changeCategoryStatusToActive() {
+        this.status = Status.ACTIVE;
+    }
 }
