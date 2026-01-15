@@ -20,4 +20,6 @@ public interface CategoryService {
     void deactivateCategory(UUID idCategory);
 
     void activateCategory(UUID idCategory);
+
+    void deleteCategory(UUID idCategory);
 }
