@@ -4,6 +4,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.UUID;
 
-public interface UploadImage {
-    boolean uploadImage(MultipartFile file, UUID id) throws Exception;
+public interface Upload {
+    String uploadImage(MultipartFile file, UUID id, UploadImpl.DitetoryType ditetoryType) throws Exception;
 }
