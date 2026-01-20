@@ -5,6 +5,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.List;
@@ -72,5 +73,12 @@ public class CategoryRestController implements CategoryAPI{
         log.info("[start] CategoryRestController - deleleCategory");
         categoryService.deleteCategory(idCategory);
         log.info("[finish] CategoryRestController - deleleCategory");
+    }
+
+    @Override
+    public void postUploadImageCategory(UUID idCategory, MultipartFile image) {
+    log.info("[start] CategoryRestController - postUploadImageCategory");
+
+    log.info("[finish] CategoryRestController - postUploadImageCategory");
     }
 }
