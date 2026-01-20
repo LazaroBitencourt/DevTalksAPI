@@ -78,7 +78,7 @@ public class CategoryRestController implements CategoryAPI{
     @Override
     public void postUploadImageCategory(UUID idCategory, MultipartFile image) {
     log.info("[start] CategoryRestController - postUploadImageCategory");
-
+    categoryService.uploadImageCategory(idCategory,image);
     log.info("[finish] CategoryRestController - postUploadImageCategory");
     }
 }
