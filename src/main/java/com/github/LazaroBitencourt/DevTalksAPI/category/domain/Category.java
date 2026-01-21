@@ -25,9 +25,8 @@ public class Category {
     UUID idCategory;
     String name;
     String description;
-    @Lob
-    @Column(name = "image", columnDefinition = "BLOB")
-    byte[] image;
+    @Column(name = "image")
+    String imageUri;
     @Enumerated(EnumType.STRING)
     Status status;
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY)
@@ -58,5 +57,10 @@ public class Category {
 
     public void changeCategoryStatusToDeleted() {
         this.status = Status.DELETED;
+    }
+
+    public void addImageUri(String imageCategoryUrl) {
+        this.imageUri = imageCategoryUrl;
+        updatedAt = LocalDateTime.now();
     }
 }
