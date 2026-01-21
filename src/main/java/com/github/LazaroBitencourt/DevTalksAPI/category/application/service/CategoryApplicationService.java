@@ -6,9 +6,12 @@ import com.github.LazaroBitencourt.DevTalksAPI.category.application.api.Category
 import com.github.LazaroBitencourt.DevTalksAPI.category.application.api.ListCategoryResponse;
 import com.github.LazaroBitencourt.DevTalksAPI.category.application.repository.CategoryRepository;
 import com.github.LazaroBitencourt.DevTalksAPI.category.domain.Category;
+import com.github.LazaroBitencourt.DevTalksAPI.util.Upload;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.UUID;
@@ -16,8 +19,12 @@ import java.util.UUID;
 @Service
 @Log4j2
 @RequiredArgsConstructor
-public class CategoryApplicationService implements CategoryService{
+public class CategoryApplicationService implements CategoryService {
+
+    @Value("${server.servlet.context-path}")
+    private String contextPathApi;
     private final CategoryRepository categoryRepository;
+    private final Upload upload;
 
     @Override
     public CategoryIdResponse createNewCategory(CategoryRequest categoryRequest) {
@@ -78,5 +85,20 @@ public class CategoryApplicationService implements CategoryService{
         category.changeCategoryStatusToDeleted();
         categoryRepository.save(category);
         log.info("[finish] CategoryApplicationService - deleleCategory");
+    }
+
+    @Override
+    public void uploadImageCategory(UUID idCategory, MultipartFile image) {
+        log.info("[start] CategoryApplicationService - uploadImageCategory");
+        Category category = categoryRepository.findCategoryById(idCategory);
+        String directoryNameToCategory = "Category_Images";
+        String imageNameSaved = upload.uploadFile(image, category.getIdCategory(), directoryNameToCategory);
+        String imageCategoryUri = contextPathApi
+                + "/category/download"
+                + "/"
+                + imageNameSaved;
+        category.addImageUri(imageCategoryUri);
+        categoryRepository.save(category);
+        log.info("[finish] CategoryApplicationService - uploadImageCategory");
     }
 }

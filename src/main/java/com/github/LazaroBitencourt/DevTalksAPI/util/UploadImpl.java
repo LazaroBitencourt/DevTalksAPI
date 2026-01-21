@@ -1,9 +1,11 @@
 package com.github.LazaroBitencourt.DevTalksAPI.util;
 
 import com.github.LazaroBitencourt.DevTalksAPI.handler.APIException;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.BufferedOutputStream;
@@ -11,43 +13,29 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.util.UUID;
 
+@Log4j2
 @Component
 public class UploadImpl implements Upload {
 
-    @Value("${path.upload.diretory}")
-    public String ServerUploadDirectoryRoot;
-
-    public enum DitetoryType {
-        CATEGORY("category"),
-        USER("user"),
-        POST("post");
-        private final String value;
-
-        DitetoryType(String value) {
-            this.value = value;
-        }
-
-        public String getValue() {
-            return value;
-        }
-    }
+    @Value("${path.upload.directory}")
+    private String directoryUploads;
 
     @Override
-    public String uploadImage(MultipartFile file, UUID id, UploadImpl.DitetoryType ditetoryType) {
-
+    public String uploadFile(MultipartFile file, UUID id, String directoryName) {
+        log.info("[start] UploadImpl - uploadImage - Saving file");
         if (!file.isEmpty() && id != null) {
-            String fileName = id + "_" + file.getOriginalFilename();
+            String fileName = StringUtils.cleanPath(id + "_" + file.getOriginalFilename());
             try {
-                File diretory = new File(ServerUploadDirectoryRoot, ditetoryType.getValue());
-                if (!diretory.exists()) {
-                    diretory.mkdirs();
+                File directory = new File(this.directoryUploads, directoryName);
+                if (!directory.exists()) {
+                    directory.mkdirs();
                 }
-                File serveFile = new File(diretory.getAbsolutePath() + File.separator + fileName);
-                BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serveFile));
+                File outputFile = new File(directory.getAbsolutePath() + File.separator + fileName);
+                BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(outputFile));
                 stream.write(file.getBytes());
                 stream.close();
-                return "/upload/" + ditetoryType.getValue() + "/" + fileName;
-
+                log.info("[finish] UploadImpl - uploadImage - File saved");
+                return fileName;
             } catch (Exception ex) {
                 throw APIException.build(HttpStatus.INTERNAL_SERVER_ERROR, "AN ERROR OCCURRED WHILE SAVING THE IMAGE TO THE SERVER", ex);
             }

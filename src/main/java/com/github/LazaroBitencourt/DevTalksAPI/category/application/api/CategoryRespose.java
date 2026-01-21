@@ -11,7 +11,7 @@ public record CategoryRespose(
         UUID idCategory,
         String name,
         String description,
-        byte[] image,
+        String imageUri,
         Status status,
         List<Post> posts
 ) {
@@ -20,7 +20,7 @@ public record CategoryRespose(
                 category.getIdCategory(),
                 category.getName(),
                 category.getDescription(),
-                category.getImage(),
+                category.getImageUri(),
                 category.getStatus(),
                 category.getPosts()
         );

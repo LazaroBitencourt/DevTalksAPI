@@ -3,6 +3,7 @@ package com.github.LazaroBitencourt.DevTalksAPI.category.application.api;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.UUID;
@@ -36,4 +37,8 @@ public interface CategoryAPI {
     @DeleteMapping("/{idCategory}")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void deleleCategory(@PathVariable("idCategory") UUID idCategory);
+
+    @PostMapping("/{idCategory}/upload")
+    @ResponseStatus(code = HttpStatus.NO_CONTENT)
+    public void postUploadImageCategory(@PathVariable("idCategory") UUID idCategory, @RequestParam("file") MultipartFile image);
 }

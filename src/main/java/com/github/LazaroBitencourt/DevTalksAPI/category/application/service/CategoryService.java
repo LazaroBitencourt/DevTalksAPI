@@ -4,6 +4,7 @@ import com.github.LazaroBitencourt.DevTalksAPI.category.application.api.Category
 import com.github.LazaroBitencourt.DevTalksAPI.category.application.api.CategoryRequest;
 import com.github.LazaroBitencourt.DevTalksAPI.category.application.api.CategoryRespose;
 import com.github.LazaroBitencourt.DevTalksAPI.category.application.api.ListCategoryResponse;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.UUID;
@@ -22,4 +23,6 @@ public interface CategoryService {
     void activateCategory(UUID idCategory);
 
     void deleteCategory(UUID idCategory);
+
+    void uploadImageCategory(UUID idCategory, MultipartFile image);
 }
