@@ -38,7 +38,7 @@ public interface CategoryAPI {
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void deleleCategory(@PathVariable("idCategory") UUID idCategory);
 
-    @PostMapping("/{idCategory}/image")
+    @PostMapping("/{idCategory}/upload")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
     public void postUploadImageCategory(@PathVariable("idCategory") UUID idCategory, @RequestParam("file") MultipartFile image);
 }
