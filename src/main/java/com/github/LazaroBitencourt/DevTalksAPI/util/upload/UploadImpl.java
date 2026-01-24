@@ -40,7 +40,7 @@ public class UploadImpl implements Upload {
                 throw APIException.build(HttpStatus.INTERNAL_SERVER_ERROR, "AN ERROR OCCURRED WHILE SAVING THE IMAGE TO THE SERVER", ex);
             }
         } else {
-            throw APIException.build(HttpStatus.BAD_REQUEST, "INVALID UPLOAD REQUEST FILE IS EMPTY OR ID NOT PROVIDED");
+            throw APIException.build(HttpStatus.BAD_REQUEST, "INVALID UPLOAD REQUEST, FILE IS EMPTY OR ID NOT PROVIDED");
         }
     }
 }
