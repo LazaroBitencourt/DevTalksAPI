@@ -9,11 +9,12 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Set;
 
 @Slf4j
 @Component
-public class ImageValidationUtilImpl implements ImageValidation{
+public class ImageValidationImpl implements ImageValidation {
 
     private final Set<String> ALLOWED_FILETYPES =
             Set.of(MediaType.IMAGE_JPEG_VALUE, MediaType.IMAGE_PNG_VALUE);
@@ -23,13 +24,15 @@ public class ImageValidationUtilImpl implements ImageValidation{
     public void validate(MultipartFile multipartFile) {
         log.info("[start] ImageValidationUtilImpl - isValid");
         if (!(multipartFile == null) && !multipartFile.isEmpty()) {
-            try {
-                String mimeType = TIKA.detect(multipartFile.getInputStream());
+            try (InputStream inputStream = multipartFile.getInputStream()) {
+                String mimeType = TIKA.detect(inputStream);
                 if (!ALLOWED_FILETYPES.contains(mimeType)) {
-                    throw APIException.build(HttpStatus.BAD_REQUEST, "INVALID FILE TYPE. ONLY JPEG/PNG ARE ALLOWED.");
+                    throw APIException.build(HttpStatus.BAD_REQUEST,
+                            "INVALID FILE TYPE. ONLY JPEG/PNG ARE ALLOWED.");
                 }
             } catch (IOException ex) {
-                throw APIException.build(HttpStatus.BAD_REQUEST, "UNABLE TO DETECT FILE TYPE", ex);
+                throw APIException.build(HttpStatus.BAD_REQUEST,
+                        "UNABLE TO DETECT FILE TYPE", ex);
             }
         }
         log.info("[finish] ImageValidationUtilImpl - isValid");
