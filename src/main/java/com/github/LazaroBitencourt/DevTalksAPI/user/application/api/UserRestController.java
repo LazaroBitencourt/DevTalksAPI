@@ -1,10 +1,12 @@
 package com.github.LazaroBitencourt.DevTalksAPI.user.application.api;
 
 import com.github.LazaroBitencourt.DevTalksAPI.user.application.service.UserService;
+import com.github.LazaroBitencourt.DevTalksAPI.util.fileValidate.ImageValidation;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.UUID;
@@ -14,6 +16,7 @@ import java.util.UUID;
 @RequiredArgsConstructor
 public class UserRestController implements UserAPI{
     private final UserService userService;
+    private final ImageValidation imageValidation;
 
     @Override
     public UserIdResponse postCreateNewUser(UserRequest userRequest, HttpServletResponse response) {
@@ -63,5 +66,13 @@ public class UserRestController implements UserAPI{
         log.info("[start] UserRestController - deleteUser");
         userService.deleteUserById(idUser);
         log.info("[finish] UserRestController - deleteUser");
+    }
+
+    @Override
+    public void postUploadImageUser(UUID idUser, MultipartFile file) {
+        log.info("[start] UserRestController - postUploadImageUser");
+        imageValidation.validate(file);
+        userService.uploadImageUser(idUser, file);
+        log.info("[finish] UserRestController - postUploadImageUser");
     }
 }
