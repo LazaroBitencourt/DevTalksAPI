@@ -4,6 +4,7 @@ import com.github.LazaroBitencourt.DevTalksAPI.user.application.api.UserDetailsR
 import com.github.LazaroBitencourt.DevTalksAPI.user.application.api.UserIdResponse;
 import com.github.LazaroBitencourt.DevTalksAPI.user.application.api.UserRequest;
 import com.github.LazaroBitencourt.DevTalksAPI.user.application.api.UserUpdateRequest;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.UUID;
 
@@ -19,4 +20,6 @@ public interface UserService {
     void activateUser(UUID idUser);
 
     void deleteUserById(UUID idUser);
+
+    void uploadImageUser(UUID idUser, MultipartFile file);
 }
