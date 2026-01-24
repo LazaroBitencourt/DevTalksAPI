@@ -11,7 +11,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.List;
 import java.util.UUID;
 
-@RequestMapping("/category")
+@RequestMapping("/categories")
 public interface CategoryAPI {
     @PostMapping
     @ResponseStatus(code = HttpStatus.CREATED)
