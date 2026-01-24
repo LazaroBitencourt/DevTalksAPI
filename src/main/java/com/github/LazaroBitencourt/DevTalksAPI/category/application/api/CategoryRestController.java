@@ -1,6 +1,7 @@
 package com.github.LazaroBitencourt.DevTalksAPI.category.application.api;
 
 import com.github.LazaroBitencourt.DevTalksAPI.category.application.service.CategoryService;
+import com.github.LazaroBitencourt.DevTalksAPI.util.ImageValidation;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -17,6 +18,7 @@ import java.util.UUID;
 public class CategoryRestController implements CategoryAPI{
 
     private  final CategoryService categoryService;
+    private final ImageValidation imageValidation;
     @Override
     public CategoryIdResponse postCreateNewCategory(CategoryRequest categoryRequest, HttpServletResponse response) {
         log.info("[start] CategoryRestController - postCreateCategory");
@@ -78,6 +80,7 @@ public class CategoryRestController implements CategoryAPI{
     @Override
     public void postUploadImageCategory(UUID idCategory, MultipartFile image) {
     log.info("[start] CategoryRestController - postUploadImageCategory");
+    imageValidation.validate(image);
     categoryService.uploadImageCategory(idCategory,image);
     log.info("[finish] CategoryRestController - postUploadImageCategory");
     }
