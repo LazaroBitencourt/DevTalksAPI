@@ -6,9 +6,12 @@ import com.github.LazaroBitencourt.DevTalksAPI.user.application.api.UserRequest;
 import com.github.LazaroBitencourt.DevTalksAPI.user.application.api.UserUpdateRequest;
 import com.github.LazaroBitencourt.DevTalksAPI.user.application.repository.UserRepository;
 import com.github.LazaroBitencourt.DevTalksAPI.user.domain.User;
+import com.github.LazaroBitencourt.DevTalksAPI.util.upload.Upload;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.UUID;
 
@@ -16,7 +19,14 @@ import java.util.UUID;
 @Log4j2
 @RequiredArgsConstructor
 public class UserApplicationService implements UserService{
+
+    @Value("${server.servlet.context-path}")
+    private String contextPathApi;
+    @Value("${path.upload.directory.users}")
+    private String directoryNameToUsers;
+
     private final UserRepository userRepository;
+    private final Upload upload;
 
     @Override
     public UserIdResponse createNewUser(UserRequest userRequest) {
@@ -68,5 +78,19 @@ public class UserApplicationService implements UserService{
         user.changeUserStatusToDeleted();
         userRepository.save(user);
     log.info("[finish] UserApplicationService - deleteUserById");
+    }
+
+    @Override
+    public void uploadImageUser(UUID idUser, MultipartFile file) {
+        log.info("[start] UserApplicationService - uploadImageUser");
+        User user = userRepository.findUserById(idUser);
+        String imageNameSaved = upload.uploadFile(file, user.getId(), directoryNameToUsers);
+        String imageUserUri = contextPathApi
+                + "/users/download"
+                + "/"
+                + imageNameSaved;
+        user.addImageUri(imageUserUri);
+        userRepository.save(user);
+        log.info("[finish] UserApplicationService - uploadImageUser");
     }
 }

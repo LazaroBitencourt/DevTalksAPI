@@ -23,8 +23,7 @@ public record UserRequest(
         String password,
 
         @Size(max = 500, message = "BIO MUST BE AT MOST 500 CHARACTERS")
-        String bio,
-        byte[] photo
+        String bio
 ) {
 
 }

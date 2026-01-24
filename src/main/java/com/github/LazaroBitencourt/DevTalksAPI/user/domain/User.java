@@ -27,10 +27,9 @@ public class User {
     private String password;
     @Column(length = 500)
     private String bio;
-    @Lob
-    @Column(name = "photo", columnDefinition = "BLOB")
-    private byte[] photo;
-    private Integer reputation;
+    @Column(name = "photoUri")
+    private String photoUri;
+    private int reputation = 0;
     @Column(name = "status")
     @Enumerated(value = EnumType.STRING)
     private Status userStatus;
@@ -45,7 +44,6 @@ public class User {
         this.email = userRequest.email();
         this.password = userRequest.password();
         this.bio = userRequest.bio();
-        this.photo = userRequest.photo();
         this.userStatus = Status.ACTIVE;
         this.createAt = LocalDateTime.now();
     }
@@ -56,7 +54,6 @@ public class User {
         userUpdateRequest.email().ifPresent(value -> this.email = value);
         userUpdateRequest.password().ifPresent(value -> this.password = value);
         userUpdateRequest.bio().ifPresent(value -> this.bio = value);
-        userUpdateRequest.photo().ifPresent(value -> this.photo = value);
         this.updateAt = LocalDateTime.now();
     }
 
@@ -70,6 +67,11 @@ public class User {
 
     public void changeUserStatusToDeleted() {
         this.userStatus = Status.DELETED;
+    }
+
+    public void addImageUri(String imageUserUri) {
+        this.photoUri = imageUserUri;
+        this.updateAt = LocalDateTime.now();
     }
 }
 

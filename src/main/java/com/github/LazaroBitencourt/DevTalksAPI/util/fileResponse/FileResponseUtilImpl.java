@@ -26,6 +26,6 @@ public class FileResponseUtilImpl implements FileResponseUtil {
 
     @Override
     public String getHeaderValue(Resource resource) {
-        return "attachment; fileName=\"" + resource.getFilename() + "\"";
+        return "attachment; filename=\"" + resource.getFilename() + "\"";
     }
 }
