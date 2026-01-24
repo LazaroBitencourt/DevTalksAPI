@@ -22,7 +22,7 @@ public class ImageValidationImpl implements ImageValidation {
     private final Tika TIKA = new Tika();
 
     public void validate(MultipartFile multipartFile) {
-        log.info("[start] ImageValidationUtilImpl - isValid");
+        log.info("[start] ImageValidationUtilImpl - validate");
         if (!(multipartFile == null) && !multipartFile.isEmpty()) {
             try (InputStream inputStream = multipartFile.getInputStream()) {
                 String mimeType = TIKA.detect(inputStream);
@@ -35,6 +35,6 @@ public class ImageValidationImpl implements ImageValidation {
                         "UNABLE TO DETECT FILE TYPE", ex);
             }
         }
-        log.info("[finish] ImageValidationUtilImpl - isValid");
+        log.info("[finish] ImageValidationUtilImpl - validate");
     }
 }
