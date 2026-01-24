@@ -90,6 +90,7 @@ public class UserApplicationService implements UserService{
                 + "/"
                 + imageNameSaved;
         user.addImageUri(imageUserUri);
+        userRepository.save(user);
         log.info("[finish] UserApplicationService - uploadImageUser");
     }
 }
