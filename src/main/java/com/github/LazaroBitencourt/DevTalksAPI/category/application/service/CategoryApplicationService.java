@@ -24,7 +24,7 @@ public class CategoryApplicationService implements CategoryService {
     @Value("${server.servlet.context-path}")
     private String contextPathApi;
     @Value("${path.upload.directory.category}")
-    private String directoryNameToCategory;
+    private String directoryNameToCategories;
 
     private final CategoryRepository categoryRepository;
     private final Upload upload;
@@ -94,9 +94,9 @@ public class CategoryApplicationService implements CategoryService {
     public void uploadImageCategory(UUID idCategory, MultipartFile file) {
         log.info("[start] CategoryApplicationService - uploadImageCategory");
         Category category = categoryRepository.findCategoryById(idCategory);
-        String imageNameSaved = upload.uploadFile(file, category.getIdCategory(), directoryNameToCategory);
+        String imageNameSaved = upload.uploadFile(file, category.getIdCategory(), directoryNameToCategories);
         String imageCategoryUri = contextPathApi
-                + "/category/download"
+                + "/categories/download"
                 + "/"
                 + imageNameSaved;
         category.addImageUri(imageCategoryUri);
