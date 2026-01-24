@@ -1,4 +1,4 @@
-package com.github.LazaroBitencourt.DevTalksAPI.util;
+package com.github.LazaroBitencourt.DevTalksAPI.util.upload;
 
 import com.github.LazaroBitencourt.DevTalksAPI.handler.APIException;
 import lombok.extern.log4j.Log4j2;
@@ -22,7 +22,7 @@ public class UploadImpl implements Upload {
 
     @Override
     public String uploadFile(MultipartFile file, UUID id, String directoryName) {
-        log.info("[start] UploadImpl - uploadImage - Saving file");
+        log.info("[start] UploadImpl - uploadFile - Saving file");
         if (!file.isEmpty() && id != null) {
             String fileName = StringUtils.cleanPath(id + "_" + file.getOriginalFilename());
             try {
@@ -34,7 +34,7 @@ public class UploadImpl implements Upload {
                 BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(outputFile));
                 stream.write(file.getBytes());
                 stream.close();
-                log.info("[finish] UploadImpl - uploadImage - File saved");
+                log.info("[finish] UploadImpl - uploadFile - File saved");
                 return fileName;
             } catch (Exception ex) {
                 throw APIException.build(HttpStatus.INTERNAL_SERVER_ERROR, "AN ERROR OCCURRED WHILE SAVING THE IMAGE TO THE SERVER", ex);

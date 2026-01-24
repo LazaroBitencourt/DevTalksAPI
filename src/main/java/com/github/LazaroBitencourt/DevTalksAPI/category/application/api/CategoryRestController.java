@@ -1,24 +1,41 @@
 package com.github.LazaroBitencourt.DevTalksAPI.category.application.api;
 
 import com.github.LazaroBitencourt.DevTalksAPI.category.application.service.CategoryService;
-import com.github.LazaroBitencourt.DevTalksAPI.util.ImageValidation;
+import com.github.LazaroBitencourt.DevTalksAPI.handler.APIException;
+import com.github.LazaroBitencourt.DevTalksAPI.util.download.Download;
+import com.github.LazaroBitencourt.DevTalksAPI.util.fileResponse.FileResponseUtil;
+import com.github.LazaroBitencourt.DevTalksAPI.util.fileValidate.ImageValidation;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
 @RestController
 @Log4j2
 @RequiredArgsConstructor
-public class CategoryRestController implements CategoryAPI{
+public class CategoryRestController implements CategoryAPI {
 
-    private  final CategoryService categoryService;
+    @Value("${path.upload.directory.category}")
+    private String categoryDirectory;
+
+    private final CategoryService categoryService;
     private final ImageValidation imageValidation;
+    private final Download download;
+    private final FileResponseUtil fileResponse;
+
     @Override
     public CategoryIdResponse postCreateNewCategory(CategoryRequest categoryRequest, HttpServletResponse response) {
         log.info("[start] CategoryRestController - postCreateCategory");
@@ -52,7 +69,7 @@ public class CategoryRestController implements CategoryAPI{
     @Override
     public void patchUpdateCategory(CategoryRequest categoryRequest, UUID idCategory) {
         log.info("[start] CategoryRestController - patchUpdateCategory");
-        categoryService.updateCategory(categoryRequest,idCategory);
+        categoryService.updateCategory(categoryRequest, idCategory);
         log.info("[finish] CategoryRestController - patchUpdateCategory");
     }
 
@@ -78,10 +95,22 @@ public class CategoryRestController implements CategoryAPI{
     }
 
     @Override
-    public void postUploadImageCategory(UUID idCategory, MultipartFile image) {
-    log.info("[start] CategoryRestController - postUploadImageCategory");
-    imageValidation.validate(image);
-    categoryService.uploadImageCategory(idCategory,image);
-    log.info("[finish] CategoryRestController - postUploadImageCategory");
+    public void postUploadImageCategory(UUID idCategory, MultipartFile file) {
+        log.info("[start] CategoryRestController - postUploadImageCategory");
+        imageValidation.validate(file);
+        categoryService.uploadImageCategory(idCategory, file);
+        log.info("[finish] CategoryRestController - postUploadImageCategory");
+    }
+
+    @Override
+    public ResponseEntity<Resource> getDownloadImageCategory(String fileName, HttpServletRequest request) {
+        log.info("[start] CategoryRestController - getDownloadImageCategory");
+        Resource resource = download.downloadFile(categoryDirectory, fileName);
+        String contentType = fileResponse.getContentType(request,resource);
+        String headerValue = fileResponse.getHeaderValue(resource);
+        log.info("[finish] CategoryRestController - getDownloadImageCategory");
+        return ResponseEntity.ok().contentType(MediaType.parseMediaType(contentType))
+                .header(HttpHeaders.CONTENT_DISPOSITION, headerValue)
+                .body(resource);
     }
 }

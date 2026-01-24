@@ -6,7 +6,7 @@ import com.github.LazaroBitencourt.DevTalksAPI.category.application.api.Category
 import com.github.LazaroBitencourt.DevTalksAPI.category.application.api.ListCategoryResponse;
 import com.github.LazaroBitencourt.DevTalksAPI.category.application.repository.CategoryRepository;
 import com.github.LazaroBitencourt.DevTalksAPI.category.domain.Category;
-import com.github.LazaroBitencourt.DevTalksAPI.util.Upload;
+import com.github.LazaroBitencourt.DevTalksAPI.util.upload.Upload;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
@@ -23,6 +23,9 @@ public class CategoryApplicationService implements CategoryService {
 
     @Value("${server.servlet.context-path}")
     private String contextPathApi;
+    @Value("${path.upload.directory.category}")
+    private String directoryNameToCategory;
+
     private final CategoryRepository categoryRepository;
     private final Upload upload;
 
@@ -88,11 +91,10 @@ public class CategoryApplicationService implements CategoryService {
     }
 
     @Override
-    public void uploadImageCategory(UUID idCategory, MultipartFile image) {
+    public void uploadImageCategory(UUID idCategory, MultipartFile file) {
         log.info("[start] CategoryApplicationService - uploadImageCategory");
         Category category = categoryRepository.findCategoryById(idCategory);
-        String directoryNameToCategory = "Category_Images";
-        String imageNameSaved = upload.uploadFile(image, category.getIdCategory(), directoryNameToCategory);
+        String imageNameSaved = upload.uploadFile(file, category.getIdCategory(), directoryNameToCategory);
         String imageCategoryUri = contextPathApi
                 + "/category/download"
                 + "/"
