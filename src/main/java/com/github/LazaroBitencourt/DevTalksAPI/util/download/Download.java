@@ -1,4 +1,4 @@
-package com.github.LazaroBitencourt.DevTalksAPI.util;
+package com.github.LazaroBitencourt.DevTalksAPI.util.download;
 
 import org.springframework.core.io.Resource;
 
