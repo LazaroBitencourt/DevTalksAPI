@@ -24,5 +24,5 @@ public interface CategoryService {
 
     void deleteCategory(UUID idCategory);
 
-    void uploadImageCategory(UUID idCategory, MultipartFile image);
+    void uploadImageCategory(UUID idCategory, MultipartFile file);
 }

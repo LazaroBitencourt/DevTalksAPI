@@ -1,7 +1,10 @@
 package com.github.LazaroBitencourt.DevTalksAPI.category.application.api;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -40,5 +43,8 @@ public interface CategoryAPI {
 
     @PostMapping("/{idCategory}/upload")
     @ResponseStatus(code = HttpStatus.NO_CONTENT)
-    public void postUploadImageCategory(@PathVariable("idCategory") UUID idCategory, @RequestParam("file") MultipartFile image);
+    public void postUploadImageCategory(@PathVariable("idCategory") UUID idCategory, @RequestParam("file") MultipartFile file);
+
+    @GetMapping("/download/{fileName:.+}")
+    public ResponseEntity<Resource> getDownloadImageCategory(@PathVariable("fileName") String fileName , HttpServletRequest request);
 }

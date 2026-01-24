@@ -1,4 +1,4 @@
-package com.github.LazaroBitencourt.DevTalksAPI.util;
+package com.github.LazaroBitencourt.DevTalksAPI.util.fileValidate;
 
 import com.github.LazaroBitencourt.DevTalksAPI.handler.APIException;
 import lombok.extern.slf4j.Slf4j;
