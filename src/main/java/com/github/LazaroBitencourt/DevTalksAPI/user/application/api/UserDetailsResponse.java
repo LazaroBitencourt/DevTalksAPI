@@ -7,7 +7,7 @@ public record UserDetailsResponse(
         String name,
         String userName,
         String bio,
-        byte[] photo,
+        String photoUri,
         Integer reputation,
         Status userStatus
 ) {
@@ -16,7 +16,7 @@ public record UserDetailsResponse(
                 user.getName(),
                 user.getUserName(),
                 user.getBio(),
-                user.getPhoto(),
+                user.getPhotoUri(),
                 user.getReputation(),
                 user.getUserStatus());
     }

@@ -25,7 +25,7 @@ public class Category {
     UUID idCategory;
     String name;
     String description;
-    @Column(name = "image")
+    @Column(name = "imageUri")
     String imageUri;
     @Enumerated(EnumType.STRING)
     Status status;
