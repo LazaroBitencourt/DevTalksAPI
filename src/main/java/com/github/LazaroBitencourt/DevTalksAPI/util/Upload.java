@@ -1,4 +1,4 @@
-package com.github.LazaroBitencourt.DevTalksAPI.util.upload;
+package com.github.LazaroBitencourt.DevTalksAPI.util;
 
 import org.springframework.web.multipart.MultipartFile;
 

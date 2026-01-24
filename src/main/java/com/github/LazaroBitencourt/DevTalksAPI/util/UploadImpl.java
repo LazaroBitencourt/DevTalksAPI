@@ -1,4 +1,4 @@
-package com.github.LazaroBitencourt.DevTalksAPI.util.upload;
+package com.github.LazaroBitencourt.DevTalksAPI.util;
 
 import com.github.LazaroBitencourt.DevTalksAPI.handler.APIException;
 import lombok.extern.log4j.Log4j2;
