@@ -23,7 +23,7 @@ public class CategoryApplicationService implements CategoryService {
 
     @Value("${server.servlet.context-path}")
     private String contextPathApi;
-    @Value("${path.upload.directory.category}")
+    @Value("${path.upload.directory.categories}")
     private String directoryNameToCategories;
 
     private final CategoryRepository categoryRepository;
